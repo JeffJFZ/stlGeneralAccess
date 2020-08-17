@@ -151,7 +151,7 @@ fclose(fid);
 bdVertexes=[ver1;ver2;ver3];
 bdNodes=unique(bdVertexes, 'rows');
 
-%% imgSize£¬Spacing Infos, demo below,
+%% imgSizeÂ£Â¬Spacing Infos, demo below,
 imSize = [512 512 300];
 imSpacing = [1 1 1]; % [.5 0.5 0.5]
 origin = [0. 0. 0.];
@@ -167,7 +167,7 @@ maxY_bd = max(bdNodes(:,2));
 minZ_bd = min(bdNodes(:,3));
 maxZ_bd = max(bdNodes(:,3));
 % posCrd = origin + idxCrd*imSpacing, for medical image computing;
-% if using posCrd, stepSize h(i)=imSpacing(i)£»rangeSz(i) = imSize(i)*imSpacing(i);
+% if using posCrd, stepSize h(i)=imSpacing(i)Â£Â»rangeSz(i) = imSize(i)*imSpacing(i);
 inNodesPre=[];
 inNodes=[];
 for i= 1:1:dimSize(1)
@@ -189,7 +189,7 @@ if isempty(inNodesPre)
     fprintf('\n!ERROR!Warning:The dimSize may be not suitable.\n')
 end
 
-%% fix x£¬evaluate y,z. (pnpoly method)
+%% fix x, evaluate y,z. (pnpoly method)
 for i= 1:1:size(inNodesPre,1)
     polyEdge2dId = find((bdNodes(:,1)>= inNodesPre(i, 1)-.5)&(bdNodes(:,1)<= inNodesPre(i, 1)+.4));
     vertY = bdNodes(polyEdge2dId,2);
