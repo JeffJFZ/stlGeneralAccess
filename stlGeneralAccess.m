@@ -151,7 +151,7 @@ fclose(fid);
 bdVertexes=[ver1;ver2;ver3];
 bdNodes=unique(bdVertexes, 'rows');
 
-%% imgSize£¬Spacing Infos, demo below. The following interior-node module is additional and optional
+%% imgSizeÂ£Â¬Spacing Infos, demo below. The following interior-node module is additional and optional
 %imSize = [512 512 300];
 %imSpacing = [1 1 1]; % [.5 0.5 0.5]
 
@@ -173,7 +173,7 @@ end
 imSpacing
 origin = [0. 0. 0.];
 % posCrd = origin + idxCrd*imSpacing, for medical image computing;
-% if using posCrd, stepSize h(i)=imSpacing(i)£»rangeSz(i) = imSize(i)*imSpacing(i);
+% if using posCrd, stepSize h(i)=imSpacing(i); rangeSz(i) = imSize(i)*imSpacing(i);
 inNodesPre=[];
 inNodes=[];
 for i= floor(minX_bd):1:ceil(maxX_bd)
