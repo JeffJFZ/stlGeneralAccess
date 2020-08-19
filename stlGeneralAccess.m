@@ -31,7 +31,7 @@ function [x, y, z, bdNodes, inNodes] = stlGeneralAccess(filename)
 %       inNodes   ---   [num_inNodes*3]. The coordinates of interior nodes.
 %
 % FUNCTION stlGeneralAccess. Version 6.1 Written by JeffZhang. AUG,2020.
-% E-mail: jfsufeng@gmail.com || jfzhang2018@zju.edu.cn
+% E-mail: jfsufeng[AT]gmail.com || jfzhang2018[AT]zju.edu.cn
 
 
 if nargin < 1
