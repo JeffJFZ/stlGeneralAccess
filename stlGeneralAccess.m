@@ -1,4 +1,4 @@
-function [x, y, z, bdNodes, inNodes] = stlGeneralAccess(filename, dimSize)
+function [x, y, z, bdNodes, inNodes] = stlGeneralAccess(filename)
 % This function reads an STL file in binary format or ascii format.
 % It returns the coordinates of both boundary nodes and interior nodes
 % of the 3D polyhedron.
@@ -151,14 +151,9 @@ fclose(fid);
 bdVertexes=[ver1;ver2;ver3];
 bdNodes=unique(bdVertexes, 'rows');
 
-%% imgSizeÂ£Â¬Spacing Infos, demo below,
-imSize = [512 512 300];
-imSpacing = [1 1 1]; % [.5 0.5 0.5]
-origin = [0. 0. 0.];
-if nargin < 2
-    disp('Default dimSize below.')
-    dimSize = imSize
-end
+%% imgSize£¬Spacing Infos, demo below. The following interior-node module is additional and optional
+%imSize = [512 512 300];
+%imSpacing = [1 1 1]; % [.5 0.5 0.5]
 
 minX_bd = min(bdNodes(:,1));
 maxX_bd = max(bdNodes(:,1));
@@ -166,13 +161,24 @@ minY_bd = min(bdNodes(:,2));
 maxY_bd = max(bdNodes(:,2));
 minZ_bd = min(bdNodes(:,3));
 maxZ_bd = max(bdNodes(:,3));
+
+disp('Default dimSize below.')
+dimSize = [ceil(maxX_bd) - floor(minX_bd), ceil(maxY_bd) - floor(minY_bd), ceil(maxZ_bd) - floor(minZ_bd)]  %imSize
+imSpacing = (1/10)*dimSize;
+for i = 1 : length(imSpacing)
+   if imSpacing(i)>1
+       imSpacing(i) = 1;
+   end
+end
+imSpacing
+origin = [0. 0. 0.];
 % posCrd = origin + idxCrd*imSpacing, for medical image computing;
-% if using posCrd, stepSize h(i)=imSpacing(i)Â£Â»rangeSz(i) = imSize(i)*imSpacing(i);
+% if using posCrd, stepSize h(i)=imSpacing(i)£»rangeSz(i) = imSize(i)*imSpacing(i);
 inNodesPre=[];
 inNodes=[];
-for i= 1:1:dimSize(1)
-    for j= 1:1:dimSize(2)
-        for k= 1:1:dimSize(3)
+for i= floor(minX_bd):1:ceil(maxX_bd)
+    for j= floor(minY_bd):1:ceil(maxY_bd)
+        for k= floor(minZ_bd):1:ceil(maxZ_bd)
             tmpX = origin(1) + i * imSpacing(1);
             tmpY = origin(2) + j * imSpacing(2);
             tmpZ = origin(3) + k * imSpacing(3);
@@ -186,7 +192,7 @@ for i= 1:1:dimSize(1)
 end
 
 if isempty(inNodesPre)
-    fprintf('\n!ERROR!Warning:The dimSize may be not suitable.\n')
+    fprintf('\n!ERROR!Warning:The dimSize or imSpacing may be not suitable.\n')
 end
 
 %% fix x, evaluate y,z. (pnpoly method)
@@ -216,6 +222,11 @@ for i= 1:1:size(inNodesPre,1)
         inNodes = [inNodes; inNodesPre(i,:)];
     end
 end
+
+if isempty(inNodes)
+    fprintf('\n!ERROR!Warning:The dimSize or imSpacing, or just the STL file may be not suitable for computing interior nodes.\n')
+end
+
 disp('>>>stlGeneralAccess.[OVER]')
 
 end
