@@ -224,7 +224,7 @@ for i= 1:1:size(inNodesPre,1)
 end
 
 if isempty(inNodes)
-    fprintf('\n!ERROR!Warning:The dimSize or imSpacing, or just the STL file may be not suitable for computing interior nodes.\n')
+    fprintf('\n!ERROR!Warning:The dimSize or imSpacing, or just the STL file may not be suitable for computing interior nodes.\n')
 end
 
 disp('>>>stlGeneralAccess.[OVER]')
