@@ -192,7 +192,7 @@ for i= floor(minX_bd):1:ceil(maxX_bd)
 end
 
 if isempty(inNodesPre)
-    fprintf('\n!ERROR!Warning:The dimSize or imSpacing may be not suitable.\n')
+    fprintf('\n!ERROR!Warning:The dimSize or imSpacing may not be suitable.\n')
 end
 
 %% fix x, evaluate y,z. (pnpoly method)
